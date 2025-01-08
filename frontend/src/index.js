@@ -17,8 +17,6 @@ const router = async () => {
   console.log("ParseURL: " + parseUrl);
 
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
-  console.log("Screen ");
-  console.log(screen);
 
   const main = document.querySelector("#main-container");
   main.innerHTML = await screen.render();
