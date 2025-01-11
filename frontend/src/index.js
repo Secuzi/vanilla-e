@@ -14,14 +14,14 @@ const router = async () => {
     (request.resource ? `/${request.resource}` : "/") +
     (request.id ? "/:id" : "") +
     (request.verb ? `/${request.verb}` : "");
-  console.log("ParseURL: " + parseUrl);
-
   const screen = routes[parseUrl] ? routes[parseUrl] : Error404Screen;
 
-  const main = document.querySelector("#main-container");
+  const main = document.getElementById("main-container");
   main.innerHTML = await screen.render();
+  if (screen.after_render) {
+    await screen.after_render();
+  }
 };
-
 window.addEventListener("load", router);
 
 window.addEventListener("hashchange", router);
